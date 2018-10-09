@@ -1,0 +1,13 @@
+pipeline:
+  build:
+    image: cbrgm/drone-hugo:latest
+    validate: true
+    output: itimo
+    url: https://itimo.xyz
+  deploy:
+    image: cschlosser/drone-ftps
+    hostname: ftp.itimo.xyz:21
+    source: itimo
+    secrets: [ ftp_username, ftp_password ]
+    when:
+        branch: [ master ]
